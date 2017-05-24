@@ -155,13 +155,20 @@ Handlebars.registerHelper('sanitize', function(html) {
     return new Handlebars.SafeString(html);
 });
 this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "                        <option value=\""
+    + escapeExpression(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"url","hash":{},"data":data}) : helper)))
+    + "\">"
+    + escapeExpression(((helper = (helper = helpers.label || (depth0 != null ? depth0.label : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"label","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"3":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression, buffer = "                        <span class=\"info_title\">"
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.title : stack1), depth0))
     + "</span>\n                        <span class=\"markdown\">";
   stack1 = lambda(((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.description : stack1), depth0);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "</span>\n";
-},"3":function(depth0,helpers,partials,data) {
+},"5":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
   return "                        <span class='info_email'>\n                            Contact: <a href=\"mailto:"
     + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.contact : stack1)) != null ? stack1.email : stack1), depth0))
@@ -170,22 +177,25 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
     + "\">"
     + escapeExpression(lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.contact : stack1)) != null ? stack1.email : stack1), depth0))
     + "</a>\n                        </span><br><br>\n";
-},"5":function(depth0,helpers,partials,data) {
+},"7":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
   return "                    <span style=\"font-variant: small-caps\">api version</span>: "
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.version : stack1), depth0))
     + "\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div id=\"swagger_sidebar\">\n    <div class=\"sticky-nav-placeholder\">\n        <div class=\"sticky-nav\">\n            <div class=\"mobile-nav\">\n                <span class=\"select-label\">API Reference: </span><span data-selected-value></span>\n            </div>\n\n            <div class=\"token-generator hide\">\n                <span data-close class=\"icon-budicon-471\"></span>\n                <label for=\"input-api-token\">Url</label>\n                <input type=\"text\" autocorrect=\"off\" class=\"ui-form-control\" id=\"input_baseUrl\"\n                       placeholder=\"http://example.com/api\">\n\n                <div class=\"scope-selector\">\n                    <label for=\"scopes\">Token</label>\n\n                    <div class=\"area controls\">\n                        <input type=\"text\" autocorrect=\"off\" class=\"ui-form-control\" id=\"input_apiKey\"\n                               placeholder=\"Enter api key or token\">\n                    </div>\n\n                    <div class=\"area cta\">\n                        <div data-add-scope id=\"explore\" class=\"btn\"><span class=\"icon-budicon-519\"></span>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n            <div data-navigator>\n                <div data-resource=\"\" label=\"Tools\">\n                    <div class=\"item\" data-tg-switch=\"\">Swagger resource <span class=\"status\"></span></div>\n                </div>\n                <div id=\"resources_nav\">\n                </div>\n            </div>\n\n            <p class=\"changes-disclaimer\">\n                <span class='info' id='api_info'>\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.info : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div id=\"swagger_sidebar\">\n    <div class=\"sticky-nav-placeholder\">\n        <div class=\"sticky-nav\">\n            <div class=\"mobile-nav\">\n                <span class=\"select-label\">API Reference: </span><span data-selected-value></span>\n            </div>\n\n            <div class=\"token-generator hide\">\n                <span data-close class=\"icon-budicon-471\"></span>\n                <label for=\"input-api-token\">API</label>\n                <select type=\"text\" autocorrect=\"off\" class=\"ui-form-control\" id=\"input_baseUrl\" placeholder=\"http://example.com/api\">\n";
+  stack1 = helpers.each.call(depth0, ((stack1 = (depth0 != null ? depth0.options : depth0)) != null ? stack1.urls : stack1), {"name":"each","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "                </select>\n\n                <div class=\"scope-selector\">\n                    <label for=\"scopes\">Authentication</label>\n\n                    <div class=\"area controls\">\n                        <label for=\"input_username\">username</form>\n                        <input type=\"text\" autocorrect=\"off\" class=\"ui-form-control\" id=\"input_username\"\n                               placeholder=\"Enter username\">\n                    </div>\n\n                    <div class=\"area controls\">\n                        <label for=\"input_password\">password</form>\n                        <input type=\"password\" autocorrect=\"off\" class=\"ui-form-control\" id=\"input_password\"\n                               placeholder=\"Enter password\">\n                    </div>\n\n                    <div class=\"area controls\">\n                        <input disabled type=\"text\" autocorrect=\"off\" class=\"ui-form-control\" id=\"input_apiKey\"\n                               placeholder=\"Login to generate token\">\n                    </div>\n\n                    <div class=\"area cta\">\n                        <div data-add-scope id=\"explore\" class=\"btn\"><span class=\"icon-budicon-519\"></span>\n                        </div>\n                    </div>\n                </div>\n\n\n                <div class=\"scope-selector\" style=\"display:none;\">\n                    <label for=\"scopes\">Token</label>\n\n\n\n                    <div class=\"area cta\">\n                        <div data-add-scope id=\"explore\" class=\"btn\"><span class=\"icon-budicon-519\"></span>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n            <div data-navigator>\n                <div data-resource=\"\" label=\"Tools\">\n                    <div class=\"item\" data-tg-switch=\"\">Swagger resource <span class=\"status\"></span></div>\n                </div>\n                <div id=\"resources_nav\">\n                </div>\n            </div>\n\n            <p class=\"changes-disclaimer\">\n                <span class='info' id='api_info'>\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.info : depth0), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n                </span>\n\n                <span class='info' id='api_info'>\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.contact : stack1)) != null ? stack1.email : stack1), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.contact : stack1)) != null ? stack1.email : stack1), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "                </span>\n\n                <span style=\"font-variant: small-caps\">base url</span>: "
     + escapeExpression(((helper = (helper = helpers.basePath || (depth0 != null ? depth0.basePath : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"basePath","hash":{},"data":data}) : helper)))
     + "\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.version : stack1), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.version : stack1), {"name":"if","hash":{},"fn":this.program(7, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "            </p>\n        </div>\n    </div>\n</div>\n\n<div id='resources_container'>\n    <ul id='resources' class=\"samples-collapsed\"></ul>\n</div>\n";
 },"useData":true});
@@ -21212,7 +21222,8 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
     'click [data-resource]': 'clickResource',
     'click [data-tg-switch]': 'toggleToken',
     'click [data-close]': 'closeToken',
-    'click #explore' : 'showCustom'
+    'change #input_baseUrl': 'showCustom',
+    'click #explore': 'generateToken'
   },
 
   apisSorter: {
@@ -21294,8 +21305,8 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
     // JSonEditor requires type='object' to be present on defined types, we add it if it's missing
     // is there any valid case were it should not be added ?
     var def;
-    for(def in this.model.definitions){
-      if (!this.model.definitions[def].type){
+    for (def in this.model.definitions) {
+      if (!this.model.definitions[def].type) {
         this.model.definitions[def].type = 'object';
       }
     }
@@ -21347,7 +21358,7 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
       $('.optionsWrapper', $(this)).hide();
     });
 
-    if (window.location.hash.length === 0 ) {
+    if (window.location.hash.length === 0) {
       var n = $(this.el).find("#resources_nav [data-resource]").first();
       n.trigger("click");
       $(window).scrollTop(0)
@@ -21456,7 +21467,25 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
     t.parents(".sticky-nav").trigger("mobile_nav:update")
   },
 
-  showCustom: function(e){
+  generateToken: function (e) {
+    var username = $("#input_username").val();
+    var password = $("#input_password").val();
+
+    $.ajax({
+      url: window.urls[0].url.replace(/v2.*/, 'login'),
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({username: username, password: password}),
+      success: function (user, status, xhr) {
+        console.log(this, xhr.getResponseHeader('Authentication'));
+        $('#input_apiKey').val(user.token);
+      }, error: function () {
+        alert('Login failed');
+      }
+    });
+  },
+
+  showCustom: function (e) {
     if (e) {
       e.preventDefault();
     }

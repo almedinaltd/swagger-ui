@@ -7,7 +7,8 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
     'click [data-resource]': 'clickResource',
     'click [data-tg-switch]': 'toggleToken',
     'click [data-close]': 'closeToken',
-    'click #explore' : 'showCustom'
+    'change #input_baseUrl': 'showCustom',
+    'click #explore': 'generateToken'
   },
 
   apisSorter: {
@@ -89,8 +90,8 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
     // JSonEditor requires type='object' to be present on defined types, we add it if it's missing
     // is there any valid case were it should not be added ?
     var def;
-    for(def in this.model.definitions){
-      if (!this.model.definitions[def].type){
+    for (def in this.model.definitions) {
+      if (!this.model.definitions[def].type) {
         this.model.definitions[def].type = 'object';
       }
     }
@@ -142,7 +143,7 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
       $('.optionsWrapper', $(this)).hide();
     });
 
-    if (window.location.hash.length === 0 ) {
+    if (window.location.hash.length === 0) {
       var n = $(this.el).find("#resources_nav [data-resource]").first();
       n.trigger("click");
       $(window).scrollTop(0)
@@ -251,7 +252,25 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
     t.parents(".sticky-nav").trigger("mobile_nav:update")
   },
 
-  showCustom: function(e){
+  generateToken: function (e) {
+    var username = $("#input_username").val();
+    var password = $("#input_password").val();
+
+    $.ajax({
+      url: window.urls[0].url.replace(/v2.*/, 'login'),
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({username: username, password: password}),
+      success: function (user, status, xhr) {
+        console.log(this, xhr.getResponseHeader('Authentication'));
+        $('#input_apiKey').val(user.token);
+      }, error: function () {
+        alert('Login failed');
+      }
+    });
+  },
+
+  showCustom: function (e) {
     if (e) {
       e.preventDefault();
     }

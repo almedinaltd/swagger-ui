@@ -7,17 +7,44 @@
 
             <div class="token-generator hide">
                 <span data-close class="icon-budicon-471"></span>
-                <label for="input-api-token">Url</label>
-                <input type="text" autocorrect="off" class="ui-form-control" id="input_baseUrl"
-                       placeholder="http://example.com/api">
+                <label for="input-api-token">API</label>
+                <select type="text" autocorrect="off" class="ui-form-control" id="input_baseUrl" placeholder="http://example.com/api">
+                    {{#each options.urls}}
+                        <option value="{{url}}">{{label}}</option>
+                    {{/each}}
+                </select>
 
                 <div class="scope-selector">
-                    <label for="scopes">Token</label>
+                    <label for="scopes">Authentication</label>
 
                     <div class="area controls">
-                        <input type="text" autocorrect="off" class="ui-form-control" id="input_apiKey"
-                               placeholder="Enter api key or token">
+                        <label for="input_username">username</form>
+                        <input type="text" autocorrect="off" class="ui-form-control" id="input_username"
+                               placeholder="Enter username">
                     </div>
+
+                    <div class="area controls">
+                        <label for="input_password">password</form>
+                        <input type="password" autocorrect="off" class="ui-form-control" id="input_password"
+                               placeholder="Enter password">
+                    </div>
+
+                    <div class="area controls">
+                        <input disabled type="text" autocorrect="off" class="ui-form-control" id="input_apiKey"
+                               placeholder="Login to generate token">
+                    </div>
+
+                    <div class="area cta">
+                        <div data-add-scope id="explore" class="btn"><span class="icon-budicon-519"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="scope-selector" style="display:none;">
+                    <label for="scopes">Token</label>
+
+
 
                     <div class="area cta">
                         <div data-add-scope id="explore" class="btn"><span class="icon-budicon-519"></span>
